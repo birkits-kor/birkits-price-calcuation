@@ -58,19 +58,19 @@
 
     <div class="selected-list" id="itemList"></div>
 
-    <div class="section-title">배송 정보 입력</div>
+    <div class="section-title">배송 정보 입력 (선택사항)</div>
     <div class="info-card">
-        <div class="input-group"><label>성함</label><input type="text" id="custName" placeholder="성함을 입력해주세요"></div>
-        <div class="input-group"><label>연락처</label><input type="tel" id="custPhone" placeholder="010-0000-0000"></div>
+        <div class="input-group"><label>성함</label><input type="text" id="custName" placeholder="성함"></div>
+        <div class="input-group"><label>연락처</label><input type="tel" id="custPhone" placeholder="연락처"></div>
         <div class="input-group">
             <label>배송지 주소</label>
             <div style="display:flex; gap:5px; margin-bottom:5px;">
                 <input type="text" id="custAddr" placeholder="주소를 검색하세요">
                 <button class="addr-btn" onclick="execPostcode()">주소 찾기</button>
             </div>
-            <input type="text" id="custAddrDetail" placeholder="상세 주소를 입력해주세요">
+            <input type="text" id="custAddrDetail" placeholder="상세 주소">
         </div>
-        <div class="input-group"><label>배송 요청사항</label><textarea id="custMsg" rows="2" placeholder="예: 방문 전 연락주세요"></textarea></div>
+        <div class="input-group"><label>배송 요청사항</label><textarea id="custMsg" rows="2" placeholder="요청사항"></textarea></div>
     </div>
 </div>
 
@@ -163,16 +163,18 @@ function render() {
 }
 
 function submitOrder() {
-    const name = document.getElementById('custName').value;
-    const phone = document.getElementById('custPhone').value;
-    const addr = document.getElementById('custAddr').value;
-    const addrDetail = document.getElementById('custAddrDetail').value;
-    const msg = document.getElementById('custMsg').value;
+    if(!selectedItems.length) { alert("선택된 품목이 없습니다."); return; }
+
+    const name = document.getElementById('custName').value || "미입력";
+    const phone = document.getElementById('custPhone').value || "미입력";
+    const addr = document.getElementById('custAddr').value || "";
+    const addrDetail = document.getElementById('custAddrDetail').value || "";
+    const msg = document.getElementById('custMsg').value || "없음";
     
-    if(!name || !phone || !selectedItems.length) { alert("필수 정보를 입력해주세요."); return; }
+    let fullAddr = (addr || addrDetail) ? `${addr} ${addrDetail}` : "미입력";
 
     let itemSummary = selectedItems.map(i => i.name).join('\n');
-    let orderText = `--- 버킷츠 견적 신청 ---\n고객명: ${name}\n연락처: ${phone}\n주소: ${addr} ${addrDetail}\n요청사항: ${msg}\n\n[선택품목]\n${itemSummary}\n\n총 금액: ${document.getElementById('totalDisplay').innerText}원`;
+    let orderText = `--- 버킷츠 견적 내역 ---\n고객명: ${name}\n연락처: ${phone}\n주소: ${fullAddr}\n요청사항: ${msg}\n\n[선택품목]\n${itemSummary}\n\n총 금액: ${document.getElementById('totalDisplay').innerText}원`;
 
     const t = document.createElement("textarea");
     document.body.appendChild(t);
