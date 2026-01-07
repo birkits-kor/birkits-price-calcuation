@@ -196,35 +196,24 @@ function selectFabricColor(groupName) {
     });
 }
 
-/* === 헤드 단품 2~3단계 로직 === */
+/* === 헤드 단품 2단계 로직 (색상 선택 제거됨) === */
 function startHeadFlow() {
-    const totalSteps = currentLineup === 'ma' ? 3 : 2;
+    const totalSteps = 2; // 색상 선택이 빠져서 2단계로 고정
     showModal("헤드 사이즈 선택", `STEP 1/${totalSteps}`, (l) => {
         const headPrices = data[currentLineup].headPrices;
         for (let size in headPrices) {
             const div = document.createElement('div'); div.className = 'option-item';
-            div.onclick = () => currentLineup === 'ma' ? selectHeadColor(size) : selectHeadType(size, null);
+            // 색상 선택 없이 바로 타입 선택으로 이동
+            div.onclick = () => selectHeadType(size, null);
             div.innerHTML = `<span>${size} 사이즈</span><span style="color:#ccc;">❯</span>`;
             l.appendChild(div);
         }
     });
 }
 
-function selectHeadColor(size) {
-    showModal("헤드 색상 선택", "STEP 2/3", (l) => {
-        const colors = data.ma.colors;
-        colors.forEach(color => {
-            const div = document.createElement('div'); div.className = 'option-item';
-            div.onclick = () => selectHeadType(size, color);
-            div.innerHTML = `<span>${color}</span><span style="color:#ccc;">❯</span>`;
-            l.appendChild(div);
-        });
-    });
-}
-
 function selectHeadType(size, color) {
-    const step = currentLineup === 'ma' ? 3 : 2;
-    const total = currentLineup === 'ma' ? 3 : 2;
+    const step = 2; // 2단계 고정
+    const total = 2; 
     showModal("헤드 구성 선택", `STEP ${step}/${total}`, (l) => {
         const options = data[currentLineup].headPrices[size];
         for (let typeName in options) {
