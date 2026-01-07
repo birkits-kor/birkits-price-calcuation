@@ -10,59 +10,51 @@
         :root { --brand-color: #1a1a1a; --point-color: #3498db; --bg-color: #f2f4f7; --sale-color: #e67e22; }
         body { font-family: -apple-system, sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; color: #333; -webkit-tap-highlight-color: transparent; }
         
-        /* 레이아웃 및 헤더 */
         .header { background: white; padding: 20px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 1.6rem; font-weight: 900; margin: 0; color: var(--brand-color); }
         .sub-logo { font-size: 0.85rem; color: #666; margin-top: 4px; font-weight: bold; }
         .content { padding: 20px; padding-bottom: 200px; max-width: 500px; margin: 0 auto; }
         
-        /* 탭 및 섹션 */
-        .section-title { font-size: 1rem; font-weight: 800; margin: 25px 0 15px 5px; color: var(--brand-color); border-left: 4px solid var(--point-color); padding-left: 10px; }
-        .lineup-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
-        .tab-btn { flex: 1; padding: 14px; border: 2px solid #ddd; border-radius: 12px; background: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .lineup-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 14px; border: 2px solid #ddd; border-radius: 12px; background: white; font-weight: bold; cursor: pointer; transition:0.2s; }
         .tab-btn.active { border-color: var(--brand-color); background: var(--brand-color); color: white; }
         
-        /* 버튼 스타일 */
-        .select-trigger { width: 100%; padding: 16px; background: white; border: 1px solid #e0e0e0; border-radius: 15px; text-align: left; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .trigger-set { border: 2px solid var(--sale-color); color: var(--sale-color); font-weight: 800; }
+        .section-title { font-size: 1rem; font-weight: 800; margin: 25px 0 10px 5px; color: var(--brand-color); border-left: 4px solid var(--point-color); padding-left: 10px; }
         
-        /* 리스트 아이템 스타일 */
+        .select-trigger { width: 100%; padding: 16px; background: white; border: 1px solid #e0e0e0; border-radius: 15px; text-align: left; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .trigger-set { border: 2px solid var(--sale-color); color: var(--sale-color); background: #fffaf0; }
+        
         .item-row { background: #fff; padding: 18px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: start; box-shadow: 0 2px 8px rgba(0,0,0,0.05); position: relative; }
-        .brand-tag { font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-bottom: 4px; display: inline-block; }
+        .brand-tag { font-size: 0.65rem; font-weight: 800; padding: 3px 6px; border-radius: 4px; margin-bottom: 6px; display: inline-block; }
         .tag-ma { background: #e8f4fd; color: #2980b9; }
         .tag-shuv { background: #fef9e7; color: #f39c12; }
-        .set-desc { font-size: 0.75rem; color: #7f8c8d; margin-top: 5px; display: block; line-height: 1.3; background: #f8f9fa; padding: 5px; border-radius: 5px; }
+        .set-desc { font-size: 0.75rem; color: #7f8c8d; margin-top: 5px; display: block; background: #f8f9fa; padding: 6px; border-radius: 6px; line-height: 1.3; }
         
-        /* 가격 표시 */
         .price-group { margin-top: 5px; }
         .price-origin { text-decoration: line-through; color: #bbb; font-size: 0.8rem; margin-right: 5px; }
-        .price-selling { color: #555; font-size: 0.85rem; font-weight: 600; }
+        .price-selling { color: #555; font-size: 0.85rem; font-weight: 600; margin-right: 5px; }
         .price-final { color: var(--sale-color); font-size: 1.05rem; font-weight: 900; display: block; margin-top: 2px; }
         .discount-badge { background: var(--sale-color); color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; margin-left: auto; }
 
-        /* 입력 폼 */
         .info-card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 10px; }
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; font-size: 0.8rem; color: #777; margin-bottom: 5px; font-weight: 600; }
         input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 0.95rem; background: #fff; }
-        .addr-btn { background: var(--brand-color); color: white; border: none; padding: 12px; border-radius: 10px; font-size: 0.85rem; cursor: pointer; width: 100px; }
+        .addr-btn { background: var(--brand-color); color: white; border: none; padding: 12px; border-radius: 10px; font-size: 0.85rem; cursor: pointer; width: 80px; }
 
-        /* 하단 바 */
         .bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 20px; border-top: 1px solid #eee; z-index: 1000; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
-        .action-group { display: flex; gap: 10px; margin-top: 10px; }
+        .action-group { display: flex; gap: 10px; margin-top: 15px; }
         .btn-action { flex: 1; padding: 15px; border-radius: 12px; font-weight: bold; border: none; color: white; background: var(--sale-color); font-size: 0.95rem; cursor: pointer; }
         .btn-secondary { background: #34495e; }
 
-        /* 모달 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: flex-end; }
-        .modal-content { width: 100%; background: white; border-radius: 25px 25px 0 0; max-height: 85%; overflow-y: auto; padding: 20px; box-sizing: border-box; position: relative; }
+        .modal-content { width: 100%; background: white; border-radius: 25px 25px 0 0; max-height: 85%; overflow-y: auto; padding: 20px; box-sizing: border-box; }
         .option-item { padding: 18px 0; border-bottom: 1px solid #f5f5f5; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .step-indicator { font-size: 0.8rem; color: var(--point-color); font-weight: bold; margin-bottom: 5px; display: block; }
+        .step-indicator { font-size: 0.85rem; color: var(--point-color); font-weight: bold; margin-bottom: 8px; display: block; }
         
-        /* 영수증 캡처용 (화면 밖) */
-        #receipt-temp { position: fixed; top: -9999px; left: -9999px; width: 380px; background: white; padding: 30px; border: 1px solid #eee; color: #333; font-family: sans-serif; }
+        #receipt-temp { position: fixed; top: -9999px; left: -9999px; width: 380px; background: white; padding: 30px; border: 1px solid #eee; color: #333; }
         .receipt-h { border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 20px; text-align: center; }
-        .receipt-line { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; align-items: flex-start; }
+        .receipt-line { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 12px; align-items: flex-start; }
     </style>
 </head>
 <body>
@@ -73,20 +65,20 @@
 </div>
 
 <div class="content">
-    <div class="section-title">라인업 선택</div>
     <div class="lineup-tabs">
         <button class="tab-btn active" id="tab-ma" onclick="switchLineup('ma')">Ma bed (마베드)</button>
         <button class="tab-btn" id="tab-shuv" onclick="switchLineup('shuv')">shuv (슈브)</button>
     </div>
 
     <div class="section-title">제품 견적 선택</div>
-    <button class="select-trigger trigger-set" onclick="openSetModal()">⭐ 세트 상품 선택 (할인 적용) <span>+</span></button>
-    <button class="select-trigger" onclick="openModal('frames')">단품: 프레임 <span>+</span></button>
-    <button class="select-trigger" id="fabricBtn" style="display:none;" onclick="openModal('fabrics')">패브릭 컬러 선택 (슈브 전용) <span>+</span></button>
+    <button class="select-trigger trigger-set" onclick="openSetModal()">⭐ 세트 상품 선택 (추가할인 적용) <span>+</span></button>
+    <button class="select-trigger" onclick="openFrameModal()">단품: 프레임 <span>+</span></button>
+    <button class="select-trigger" id="fabricBtn" style="display:none;" onclick="openModal('fabrics')">패브릭 컬러 (슈브 전용) <span>+</span></button>
     <button class="select-trigger" onclick="openModal('mattresses')">단품: 매트리스 <span>+</span></button>
     <button class="select-trigger" onclick="openModal('heads')">단품: 헤드 / 협탁 패키지 <span>+</span></button>
     <button class="select-trigger" onclick="openModal('tables')">단품: 테이블 <span>+</span></button>
     <button class="select-trigger" onclick="openModal('lights')">단품: 무드등 <span>+</span></button>
+    <button class="select-trigger" onclick="openModal('delivery')">배송비 추가 (수도권 외) <span>+</span></button>
 
     <div id="itemList"></div>
 
@@ -131,9 +123,14 @@
 let currentLineup = 'ma';
 let selectedItems = [];
 
-/* --- 데이터 정의 (시트 기반 100% 반영) --- */
+// 배송비 데이터 (시트 반영)
+const deliveryData = [
+    {n:"배송비 (충청/강화도/영종도/동두천/포천/연천)", p:30000},
+    {n:"배송비 (강원/경상/전라)", p:47500},
+    {n:"제주 택배배송 (고객직접조립)", p:0}
+];
 
-// 단품 매트리스 (정상가/판매가)
+// 단품 매트리스 (판매가는 시트, 정상가는 임의)
 const mattressData = [
     {n:"S 하드", op:1100000, p:553500}, {n:"S 미디움 하드", op:1100000, p:465500},
     {n:"SS 하드", op:1200000, p:573500}, {n:"SS 미디움 하드", op:1200000, p:485500},
@@ -145,62 +142,51 @@ const mattressData = [
 const data = {
     ma: {
         frames: [
-            {n:"SS 프레임 (그레이/내추럴/화이트)", op:2500000, p:1089000},
-            {n:"Q 프레임 (그레이/내추럴/화이트)", op:2800000, p:1289000},
-            {n:"S 프레임 (그레이/내추럴/화이트)", op:2400000, p:989000},
-            {n:"S+S 프레임 (커플전용)", op:4800000, p:1978000},
-            {n:"SS+SS 프레임 (커플전용)", op:5000000, p:2178000}
+            {n:"SS 프레임 (그레이)", op:2500000, p:1089000}, {n:"SS 프레임 (내추럴)", op:2500000, p:1089000}, {n:"SS 프레임 (화이트)", op:2500000, p:1089000},
+            {n:"Q 프레임 (그레이)", op:2800000, p:1289000}, {n:"Q 프레임 (내추럴)", op:2800000, p:1289000}, {n:"Q 프레임 (화이트)", op:2800000, p:1289000},
+            {n:"S 프레임 (그레이)", op:2400000, p:989000}, {n:"S 프레임 (내추럴)", op:2400000, p:989000}, {n:"S 프레임 (화이트)", op:2400000, p:989000},
+            {n:"S+S 프레임 (그레이)", op:4800000, p:1978000}, {n:"S+S 프레임 (내추럴)", op:4800000, p:1978000}, {n:"S+S 프레임 (화이트)", op:4800000, p:1978000},
+            {n:"SS+SS 프레임 (그레이)", op:5000000, p:2178000}, {n:"SS+SS 프레임 (내추럴)", op:5000000, p:2178000}, {n:"SS+SS 프레임 (화이트)", op:5000000, p:2178000}
         ],
-        fabrics: [], // 마베드는 패브릭 없음
+        fabrics: [],
         heads: [
-            {n:"SS 헤드 단품", op:400000, p:160000}, 
-            {n:"SS 헤드+협탁1", op:800000, p:340000}, 
-            {n:"SS 헤드+협탁2", op:1200000, p:520000},
-            {n:"Q 헤드 단품", op:500000, p:200000}, 
-            {n:"Q 헤드+협탁1", op:900000, p:380000}, 
-            {n:"Q 헤드+협탁2", op:1300000, p:560000},
-            {n:"S 헤드 단품", op:350000, p:140000},
-            {n:"S 헤드+협탁1", op:700000, p:320000},
-            {n:"S 헤드+협탁2", op:1050000, p:500000},
-            {n:"S+S 헤드 단품", op:700000, p:280000}, 
-            {n:"S+S 헤드+협탁1", op:1100000, p:460000}, 
-            {n:"S+S 헤드+협탁2", op:1500000, p:640000},
-            {n:"SS+SS 헤드 단품", op:800000, p:320000},
-            {n:"SS+SS 헤드+협탁1", op:1200000, p:500000},
-            {n:"SS+SS 헤드+협탁2", op:1600000, p:680000}
+            {n:"SS 헤드 단품", op:400000, p:160000}, {n:"SS 헤드+협탁1", op:800000, p:340000}, {n:"SS 헤드+협탁2", op:1200000, p:520000},
+            {n:"Q 헤드 단품", op:500000, p:200000}, {n:"Q 헤드+협탁1", op:900000, p:380000}, {n:"Q 헤드+협탁2", op:1300000, p:560000},
+            {n:"S 헤드 단품", op:350000, p:140000}, {n:"S 헤드+협탁1", op:700000, p:320000}, {n:"S 헤드+협탁2", op:1050000, p:500000},
+            {n:"S+S 헤드 단품", op:700000, p:280000}, {n:"S+S 헤드+협탁1", op:1100000, p:460000}, {n:"S+S 헤드+협탁2", op:1500000, p:640000},
+            {n:"SS+SS 헤드 단품", op:800000, p:320000}, {n:"SS+SS 헤드+협탁1", op:1200000, p:500000}, {n:"SS+SS 헤드+협탁2", op:1600000, p:680000}
         ],
         tables: [
             {n:"SS 수동 테이블", op:400000, p:180000}, {n:"SS 자동 테이블", op:800000, p:340000},
             {n:"Q 수동 테이블", op:500000, p:240000}, {n:"Q 자동 테이블", op:900000, p:400000},
             {n:"S+S 수동 테이블", op:700000, p:300000}, {n:"S+S 자동 테이블", op:1100000, p:460000}
         ],
-        // 세트 데이터: sizes 배열은 [정상가, 판매가, 할인가(H), 할인가(MH)] 순서
         sets: {
             "🌙 에센셜 슬립": { d: 2, o: "프레임 + 매트리스 + 헤드", sizes: { 
-                "SS": [4100000, 1822500, 1786000, 1699760], 
-                "Q": [4800000, 2100500, 2058000, 1993320],
-                "S+S": [7700000, 3364500, 3298000, 3125520],
-                "SS+SS": [8600000, 3644900, 3572000, 3399520]
+                "SS": [3233500, 1822500, 1786000, 1699760], 
+                "Q": [3611500, 2100500, 2058000, 1993320],
+                "S+S": [6187000, 3365000, 3298000, 3125520],
+                "SS+SS": [6467000, 3645000, 3572000, 3399520]
             } },
             "💫 로맨틱 슬립": { d: 3, o: "프레임 + 매트리스 + 헤드 + 협탁(양쪽)", sizes: { 
-                "SS": [4900000, 2182500, 2117000, 2031640], 
-                "Q": [5600000, 2460800, 2387000, 2322980], 
-                "S+S": [9300000, 3724700, 3613000, 3442280], 
-                "SS+SS": [10200000, 4005100, 3885000, 3714280] 
+                "SS": [3593500, 2182500, 2117000, 2031640], 
+                "Q": [3971500, 2460500, 2387000, 2322980], 
+                "S+S": [6547000, 3725000, 3613000, 3442280], 
+                "SS+SS": [6827000, 4005000, 3885000, 3714280] 
             } },
             "📚 북슬립 세트": { d: 3, o: "프레임 + 매트리스 + 자동 테이블", sizes: { 
-                "SS": [4500000, 2002500, 1942000, 1856640], 
-                "Q": [5200000, 2300500, 2231000, 2166980], 
-                "S+S": [8600000, 3545400, 3439000, 3268280] 
+                "SS": [3413500, 2002500, 1942000, 1856640], 
+                "Q": [3811500, 2300500, 2231000, 2166980], 
+                "S+S": [6367000, 3545000, 3439000, 3268280] 
             } },
             "🌟 풀슬립 세트": { d: 5, o: "프레임+매트리스+헤드+협탁+자동테이블+무드등", sizes: { 
-                "SS": [5840000, 2592600, 2463000, 2379400], 
-                "Q": [6640000, 2930500, 2784000, 2721300], 
-                "S+S": [10980000, 4254700, 4042000, 3874800] 
+                "SS": [4003500, 2592500, 2463000, 2379400], 
+                "Q": [4441500, 2930500, 2784000, 2721300], 
+                "S+S": [7077000, 4255000, 4042000, 3874800] 
             } },
             "💑 위드슬립 세트": { d: 5, o: "커플프레임2+매트리스2+헤드2+협탁+무드등", sizes: { 
-                "S+S": [10280000, 3794700, 3605000, 3437800], 
-                "SS+SS": [11180000, 4074700, 3871000, 3703800] 
+                "S+S": [6617000, 3795000, 3605000, 3437800], 
+                "SS+SS": [6897000, 4075000, 3871000, 3703800] 
             } }
         }
     },
@@ -213,26 +199,28 @@ const data = {
             {n:"SS+SS 프레임 (보에르 Fog)", op:8000000, p:3018000}
         ],
         fabrics: [
-            {n:"보에르 Fog (아이보리)", op:0, p:0},
-            {n:"보에르 Sand (베이지)", op:0, p:0},
-            {n:"보에르 Ocean (블루)", op:0, p:0}
+            {n:"보에르 - Fog(아이보리)", op:0, p:0},
+            {n:"보에르 - Moonstone(그레이)", op:0, p:0},
+            {n:"보에르 - Shadow(블랙)", op:0, p:0},
+            {n:"보에르 - Forest(그린)", op:0, p:0},
+            {n:"보에르 - Rosé(핑크)", op:0, p:0},
+            {n:"보에르 - Aqua(라이트블루)", op:0, p:0},
+            {n:"보에르 - Sand(베이지)", op:0, p:0},
+            {n:"스웨린 Suerin (상담)", op:0, p:200000},
+            {n:"고레더 GoLeather™ - 화이트", op:0, p:200000},
+            {n:"고레더 GoLeather™ - 블랙", op:0, p:200000},
+            {n:"멜로루프 - Knowing Black", op:0, p:100000},
+            {n:"멜로루프 - Taupe Coffee", op:0, p:100000},
+            {n:"멜로루프 - Lamb Milk", op:0, p:100000},
+            {n:"리노아 - Sand", op:0, p:100000},
+            {n:"리노아 - Cream", op:0, p:100000}
         ],
         heads: [
-            {n:"SS 패브릭 헤드", op:800000, p:280000}, 
-            {n:"SS 헤드+협탁1", op:1400000, p:600000}, 
-            {n:"SS 헤드+협탁2", op:2000000, p:920000},
-            {n:"Q 패브릭 헤드", op:1000000, p:320000}, 
-            {n:"Q 헤드+협탁1", op:1800000, p:740000}, 
-            {n:"Q 헤드+협탁2", op:2600000, p:1060000},
-            {n:"S 패브릭 헤드", op:700000, p:240000},
-            {n:"S 헤드+협탁1", op:1300000, p:560000},
-            {n:"S 헤드+협탁2", op:1900000, p:880000},
-            {n:"S+S 커플 헤드", op:1400000, p:480000},
-            {n:"S+S 헤드+협탁1", op:2000000, p:800000},
-            {n:"S+S 헤드+협탁2", op:2600000, p:1120000},
-            {n:"SS+SS 커플 헤드", op:1600000, p:560000},
-            {n:"SS+SS 헤드+협탁1", op:2200000, p:880000},
-            {n:"SS+SS 헤드+협탁2", op:2800000, p:1200000}
+            {n:"SS 패브릭 헤드", op:800000, p:280000}, {n:"SS 헤드+협탁1", op:1400000, p:600000}, {n:"SS 헤드+협탁2", op:2000000, p:920000},
+            {n:"Q 패브릭 헤드", op:1000000, p:320000}, {n:"Q 헤드+협탁1", op:1800000, p:740000}, {n:"Q 헤드+협탁2", op:2600000, p:1060000},
+            {n:"S 패브릭 헤드", op:700000, p:240000}, {n:"S 헤드+협탁1", op:1300000, p:560000}, {n:"S 헤드+협탁2", op:1900000, p:880000},
+            {n:"S+S 커플 헤드", op:1400000, p:480000}, {n:"S+S 헤드+협탁1", op:2000000, p:800000}, {n:"S+S 헤드+협탁2", op:2600000, p:1120000},
+            {n:"SS+SS 커플 헤드", op:1600000, p:560000}, {n:"SS+SS 헤드+협탁1", op:2200000, p:880000}, {n:"SS+SS 헤드+협탁2", op:2800000, p:1200000}
         ],
         tables: [
             {n:"SS 패브릭 테이블", op:700000, p:320000}, 
@@ -241,38 +229,37 @@ const data = {
         ],
         sets: {
             "🌙 에센셜 슬립": { d: 2, o: "슈브 프레임 + 매트리스 + 헤드 (Fog)", sizes: { 
-                "SS": [5500000, 2362500, 2315000, 2228760], 
-                "Q": [6500000, 2740500, 2686000, 2621320],
-                "S+S": [10450000, 4405100, 4316000, 4143520],
-                "SS+SS": [11600000, 4725500, 4630000, 4457520]
+                "SS": [4853500, 2362500, 2315000, 2228760], 
+                "Q": [5431500, 2740500, 2686000, 2621320],
+                "S+S": [9087000, 4405000, 4317000, 4144520],
+                "SS+SS": [9707000, 4725000, 4631000, 4458520]
             } },
             "💫 로맨틱 슬립": { d: 3, o: "프레임 + 매트리스 + 헤드 + 협탁(양쪽)", sizes: { 
-                "SS": [6700000, 3002500, 2912000, 2826640], 
-                "Q": [7800000, 3380400, 3279000, 3214980], 
-                "S+S": [12800000, 5045400, 4894000, 4723280], 
-                "SS+SS": [14000000, 5364900, 5204000, 5033280] 
+                "SS": [5493500, 3002500, 2912000, 2826640], 
+                "Q": [6071500, 3380500, 3279000, 3214980], 
+                "S+S": [9727000, 5045000, 4894000, 4723280], 
+                "SS+SS": [10347000, 5365000, 5033280, 5033280] // 시트상 MH가격 동일
             } },
             "📚 북슬립 세트": { d: 3, o: "프레임 + 매트리스 + 테이블", sizes: { 
-                "SS": [5900000, 2402500, 2330000, 2244640], 
-                "Q": [7000000, 2780400, 2697000, 2632980], 
-                "S+S": [11750000, 4324700, 4195000, 4024280] 
+                "SS": [4893500, 2402500, 2330000, 2244640], 
+                "Q": [5471500, 2780500, 2697000, 2632980], 
+                "S+S": [9007000, 4325000, 4195000, 4024280] 
             } },
             "🌟 풀슬립 세트": { d: 5, o: "프레임+매트리스+헤드+협탁+테이블+무드등", sizes: { 
-                "SS": [7540000, 3392600, 3223000, 3139400], 
-                "Q": [8740000, 3810500, 3620000, 3557300], 
-                "S+S": [14480000, 5514700, 5239000, 5071800] 
+                "SS": [5883500, 3392500, 3223000, 3139400], 
+                "Q": [6501500, 3810500, 3620000, 3557300], 
+                "S+S": [10197000, 5515000, 5239000, 5071800] 
             } },
             "💑 위드슬립 세트": { d: 5, o: "커플프레임2+매트리스2+헤드2+협탁+무드등", sizes: { 
-                "S+S": [12480000, 5114700, 4859000, 4691800], 
-                "SS+SS": [13680000, 5258900, 4996000, 4828800] 
+                "S+S": [9797000, 5115000, 4859000, 4691800], 
+                "SS+SS": [10241000, 5259000, 4996000, 4828800] 
             } }
         }
     }
 };
 
-/* --- 기능 구현 --- */
+/* --- 기능 구현부 --- */
 
-// 라인업 변경
 function switchLineup(l) { 
     currentLineup = l; 
     document.getElementById('tab-ma').classList.toggle('active', l === 'ma'); 
@@ -280,7 +267,6 @@ function switchLineup(l) {
     document.getElementById('fabricBtn').style.display = l === 'shuv' ? 'flex' : 'none';
 }
 
-// 다음 주소 찾기
 function execPostcode() { 
     new daum.Postcode({ oncomplete: function(d) { 
         document.getElementById('custAddr').value = d.address; 
@@ -288,12 +274,13 @@ function execPostcode() {
     }}).open(); 
 }
 
-// 1단계: 세트 종류 모달 열기
+function openFrameModal() { openModal('frames'); }
+
+// 1단계: 세트 종류
 function openSetModal() {
     const l = document.getElementById('optionList'); 
-    const step = document.getElementById('stepIndicator');
     document.getElementById('modalTitle').innerText = "세트 종류 선택";
-    step.innerText = "STEP 1/3";
+    document.getElementById('stepIndicator').innerText = "STEP 1/3";
     l.innerHTML = '';
     
     for (let setName in data[currentLineup].sets) {
@@ -315,12 +302,11 @@ function openSetModal() {
     document.getElementById('modalOverlay').style.display = 'flex';
 }
 
-// 2단계: 세트 사이즈 선택
+// 2단계: 사이즈
 function selectSetSize(setName) {
     const l = document.getElementById('optionList'); 
-    const step = document.getElementById('stepIndicator');
     document.getElementById('modalTitle').innerText = `${setName} - 사이즈 선택`;
-    step.innerText = "STEP 2/3";
+    document.getElementById('stepIndicator').innerText = "STEP 2/3";
     l.innerHTML = '';
     
     for (let size in data[currentLineup].sets[setName].sizes) {
@@ -331,16 +317,14 @@ function selectSetSize(setName) {
     }
 }
 
-// 3단계: 세트 매트리스 선택 (3중 가격 표시)
+// 3단계: 매트리스
 function selectSetType(setName, size) {
     const l = document.getElementById('optionList'); 
-    const step = document.getElementById('stepIndicator');
     document.getElementById('modalTitle').innerText = "매트리스 타입 선택";
-    step.innerText = "STEP 3/3";
+    document.getElementById('stepIndicator').innerText = "STEP 3/3";
     l.innerHTML = '';
     
-    const p = data[currentLineup].sets[setName].sizes[size];
-    // p = [정상가, 판매가, 할인가H, 할인가MH]
+    const p = data[currentLineup].sets[setName].sizes[size]; // [정상가, 판매가, 할인가H, 할인가MH]
     const types = [{n:"하드", fp:p[2]}, {n:"미디움 하드", fp:p[3]}];
     
     types.forEach(type => {
@@ -363,15 +347,18 @@ function selectSetType(setName, size) {
     });
 }
 
-// 일반 단품 옵션 모달 (2중 가격 표시)
+// 단품/옵션 모달
 function openModal(c) {
     const l = document.getElementById('optionList'); 
-    const step = document.getElementById('stepIndicator');
     document.getElementById('modalTitle').innerText = "옵션 추가";
-    step.innerText = ""; // 단품은 스텝 없음
+    document.getElementById('stepIndicator').innerText = ""; 
     l.innerHTML = '';
     
-    let opts = c === 'mattresses' ? mattressData : (c === 'lights' ? [{n:"무드등 한쪽", op:70000, p:35000}, {n:"무드등 양쪽", op:140000, p:70000}] : data[currentLineup][c]);
+    let opts = [];
+    if(c === 'delivery') opts = deliveryData;
+    else if(c === 'mattresses') opts = mattressData;
+    else if(c === 'lights') opts = [{n:"무드등 한쪽", op:70000, p:35000}, {n:"무드등 양쪽", op:140000, p:70000}];
+    else opts = data[currentLineup][c];
     
     opts.forEach(opt => {
         const div = document.createElement('div'); div.className = 'option-item';
@@ -392,91 +379,52 @@ function openModal(c) {
 }
 
 function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
-
-// 아이템 추가/삭제/렌더링
-function addItem(n, p, b, d, op) { 
-    selectedItems.push({ id: Date.now(), name: `[${b === 'ma' ? '마베드' : '슈브'}] ${n}`, price: p, desc: d, origin: op }); 
-    render(); 
-}
+function addItem(n, p, b, d, op) { selectedItems.push({ id: Date.now(), name: `[${b === 'ma' ? '마베드' : '슈브'}] ${n}`, price: p, desc: d, origin: op }); render(); }
 function removeItem(id) { selectedItems = selectedItems.filter(i => i.id !== id); render(); }
 
 function render() {
     const list = document.getElementById('itemList'); list.innerHTML = ''; let t = 0;
     selectedItems.forEach(i => { t += i.price;
-        const brandTag = i.name.includes('마베드') ? 'tag-ma' : 'tag-shuv';
         list.innerHTML += `
             <div class="item-row">
                 <div style="flex:1;">
-                    <span class="brand-tag ${brandTag}">${i.name.includes('마베드') ? 'MA BED' : 'SHUV'}</span>
-                    <strong style="display:block; margin-top:5px; font-size:0.95rem;">${i.name.replace(/^\[.*?\]\s*/, '')}</strong>
+                    <span class="brand-tag ${i.name.includes('마베드') ? 'tag-ma' : 'tag-shuv'}">${i.name.includes('마베드') ? 'MA BED' : 'SHUV'}</span>
+                    <strong style="display:block; margin-top:5px;">${i.name.replace(/^\[.*?\]\s*/, '')}</strong>
                     ${i.desc ? `<span class="set-desc">구성: ${i.desc}</span>` : ''}
                     <div class="price-group">
                         ${i.origin > 0 ? `<span class="price-origin">₩${i.origin.toLocaleString()}</span>` : ''}
                         <span class="price-final">₩${i.price.toLocaleString()}원</span>
                     </div>
                 </div>
-                <button onclick="removeItem(${i.id})" style="border:none; background:none; font-size:1.5rem; color:#ccc; cursor:pointer; padding:0 0 0 10px;">×</button>
+                <button onclick="removeItem(${i.id})" style="border:none; background:none; font-size:1.5rem; color:#ccc; cursor:pointer;">×</button>
             </div>`;
-    }); 
-    document.getElementById('totalDisplay').innerText = t.toLocaleString();
+    }); document.getElementById('totalDisplay').innerText = t.toLocaleString();
 }
 
-// 텍스트 복사 기능
 function copyText() {
     if(!selectedItems.length) return alert("선택된 품목이 없습니다.");
-    const s = {
-        n: document.getElementById('custName').value,
-        p: document.getElementById('custPhone').value,
-        a: document.getElementById('custAddr').value + " " + document.getElementById('custAddrDetail').value,
-        m: document.getElementById('custMsg').value
-    };
-    
+    const s = { n: document.getElementById('custName').value, p: document.getElementById('custPhone').value, a: document.getElementById('custAddr').value + " " + document.getElementById('custAddrDetail').value, m: document.getElementById('custMsg').value };
     const items = selectedItems.map(i => `- ${i.name} ${i.desc ? `(${i.desc})` : ''} : ${i.price.toLocaleString()}원`).join('\n');
-    const txt = `[버킷츠 견적서]\n고객명: ${s.n}\n연락처: ${s.p}\n배송지: ${s.a}\n요청사항: ${s.m}\n\n[견적내역]\n${items}\n\n총 합계: ${document.getElementById('totalDisplay').innerText}원`;
+    const txt = `[버킷츠 견적서]\n고객명: ${s.n}\n연락처: ${s.p}\n주소: ${s.a}\n\n${items}\n\n총 합계: ${document.getElementById('totalDisplay').innerText}원`;
     
-    // 모바일 호환성 텍스트 복사
-    const t = document.createElement("textarea"); document.body.appendChild(t); t.value = txt; t.select(); 
-    document.execCommand('copy'); document.body.removeChild(t); 
+    const t = document.createElement("textarea"); document.body.appendChild(t); t.value = txt; t.select(); document.execCommand('copy'); document.body.removeChild(t); 
     alert("견적 내역이 복사되었습니다!");
 }
 
-// 이미지 저장 기능 (html2canvas)
 async function downloadImage() {
     if(!selectedItems.length) return alert("선택된 품목이 없습니다.");
     const r = document.getElementById('receipt-temp');
-    const s = {
-        n: document.getElementById('custName').value || "-",
-        p: document.getElementById('custPhone').value || "-",
-        a: (document.getElementById('custAddr').value + " " + document.getElementById('custAddrDetail').value).trim() || "-"
-    };
-
-    let h = `<div class="receipt-h"><strong style="font-size:22px;">birkits</strong><br><span style="font-size:12px; color:#666;">스마트 견적서</span></div>`;
-    h += `<div style="margin-bottom:20px; font-size:12px; line-height:1.6; border-bottom:1px solid #eee; padding-bottom:15px;">
-        <strong>고객명:</strong> ${s.n}<br><strong>연락처:</strong> ${s.p}<br><strong>배송지:</strong> ${s.a}</div>`;
+    const s = { n: document.getElementById('custName').value, p: document.getElementById('custPhone').value, a: document.getElementById('custAddr').value + " " + document.getElementById('custAddrDetail').value };
     
-    selectedItems.forEach(i => { 
-        h += `<div class="receipt-line">
-            <div style="flex:1;">
-                <span style="font-weight:bold; display:block;">${i.name.replace(/^\[.*?\]\s*/, '')}</span>
-                ${i.desc ? `<span style="font-size:11px; color:#888;">${i.desc}</span>` : ''}
-            </div>
-            <span style="font-weight:bold; margin-left:10px;">${i.price.toLocaleString()}</span>
-        </div>`; 
-    });
-    
-    h += `<div style="margin-top:20px; border-top:2px solid #333; padding-top:15px; display:flex; justify-content:space-between; font-weight:bold; font-size:18px; color:var(--sale-color);">
-        <span>총 합계</span><span>${document.getElementById('totalDisplay').innerText}원</span></div>`;
-    
+    let h = `<div class="receipt-h"><strong style="font-size:22px;">birkits</strong><br><span style="font-size:12px;">스마트 견적서</span></div><div style="margin-bottom:20px; font-size:12px; line-height:1.6; border-bottom:1px solid #eee; padding-bottom:15px;"><strong>고객명:</strong> ${s.n}<br><strong>연락처:</strong> ${s.p}<br><strong>주소:</strong> ${s.a}</div>`;
+    selectedItems.forEach(i => { h += `<div class="receipt-line"><div style="flex:1;"><span style="font-weight:bold;">${i.name.replace(/^\[.*?\]\s*/, '')}</span>${i.desc ? `<br><span style="font-size:11px; color:#888;">${i.desc}</span>` : ''}</div><span style="font-weight:bold;">${i.price.toLocaleString()}</span></div>`; });
+    h += `<div style="margin-top:20px; border-top:2px solid #333; padding-top:15px; display:flex; justify-content:space-between; font-weight:bold; font-size:18px; color:var(--sale-color);"><span>총 합계</span><span>${document.getElementById('totalDisplay').innerText}원</span></div>`;
     r.innerHTML = h;
 
     try {
         const canvas = await html2canvas(r, { scale: 2 });
-        const link = document.createElement('a'); 
-        const d = new Date();
-        link.download = `버킷츠_견적_${d.getFullYear()}${(d.getMonth()+1)}${d.getDate()}_${d.getHours()}${d.getMinutes()}.png`;
-        link.href = canvas.toDataURL(); 
-        link.click();
-    } catch (e) { alert("이미지 저장 중 오류가 발생했습니다."); }
+        const link = document.createElement('a'); link.download = '견적서.png'; link.href = canvas.toDataURL(); link.click();
+    } catch (e) { alert("저장 실패"); }
 }
 </script>
 </body>
