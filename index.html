@@ -7,7 +7,7 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
-        :root { --brand-color: #1a1a1a; --point-color: #3498db; --bg-color: #f2f4f7; --delete-color: #ff4d4d; --sale-color: #e67e22; }
+        :root { --brand-color: #1a1a1a; --point-color: #3498db; --bg-color: #f2f4f7; --sale-color: #e67e22; }
         body { font-family: -apple-system, sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; color: #333; -webkit-tap-highlight-color: transparent; }
         .header { background: white; padding: 20px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: -1px; margin: 0; color: var(--brand-color); }
@@ -112,7 +112,6 @@
 let currentLineup = 'ma';
 let selectedItems = [];
 
-// 매트리스 정상가 추정치 (정확한 값이 없으므로 임의 설정 후 판매가는 유지)
 const mattressData = [
     {n:"SS 하드", op:1200000, p:573500}, {n:"SS 미디움 하드", op:1200000, p:485500}, 
     {n:"Q 하드", op:1500000, p:611500}, {n:"Q 미디움 하드", op:1500000, p:545500},
@@ -128,8 +127,8 @@ const data = {
         tables: [{n:"SS 테이블 자동", op:800000, p:340000}, {n:"Q 테이블 자동", op:900000, p:400000}],
         sets: {
             "🌙 에센셜 슬립": { d: 2, o: "프레임 + 매트리스 + 헤드", sizes: { 
-                "SS": [3800000, 1822450, 1786000, 1699760], // [정상가, 판매가, 할인가H, 할인가MH]
-                "Q": [4500000, 2100000, 2058000, 1993320],
+                "SS": [4100000, 1822500, 1786000, 1699760], 
+                "Q": [4800000, 2100500, 2058000, 1993320],
                 "S+S": [7500000, 3365300, 3298000, 3125520],
                 "SS+SS": [8000000, 3644900, 3572000, 3399520]
             } },
@@ -219,12 +218,9 @@ function selectSetMattress(setName, size) {
     const l = document.getElementById('optionList'); const t = document.getElementById('modalTitle'); const step = document.getElementById('stepIndicator');
     l.innerHTML = ''; t.innerText = `${setName} (${size}) - 매트리스 선택`; step.innerText = "STEP 3/3";
     const setInfo = data[currentLineup].sets[setName];
-    const pArr = setInfo.sizes[size]; // [정상가, 판매가, 할인가H, 할인가MH]
+    const pArr = setInfo.sizes[size]; 
     
-    const types = [
-        { n: "하드", fp: pArr[2] },
-        { n: "미디움 하드", fp: pArr[3] }
-    ];
+    const types = [{ n: "하드", fp: pArr[2] }, { n: "미디움 하드", fp: pArr[3] }];
     
     types.forEach(type => {
         const div = document.createElement('div'); div.className = 'option-item';
