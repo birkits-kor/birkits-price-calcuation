@@ -61,11 +61,11 @@
     </div>
 
     <div class="section-title">제품 견적 선택</div>
-    <button class="select-trigger trigger-set" onclick="openSetModal()">⭐ 세트 상품 선택 (추가할인 적용) <span>+</span></button>
-    <button class="select-trigger" onclick="openModal('frames')">단품: 프레임 <span>+</span></button>
-    <button class="select-trigger" id="fabricBtn" style="display:none;" onclick="openModal('fabrics')">패브릭 컬러 (슈브 전용) <span>+</span></button>
-    <button class="select-trigger" onclick="openModal('mattresses')">단품: 매트리스 <span>+</span></button>
-    <button class="select-trigger" onclick="openModal('heads')">단품: 헤드 / 협탁 패키지 <span>+</span></button>
+    <button class="select-trigger trigger-set" onclick="startSetFlow()">⭐ 세트 상품 선택 (추가할인 적용) <span>+</span></button>
+    <button class="select-trigger" onclick="startFrameFlow()">단품: 프레임 <span>+</span></button>
+    <button class="select-trigger" id="fabricBtn" style="display:none;" onclick="startFabricFlow()">패브릭 컬러 (슈브 전용) <span>+</span></button>
+    <button class="select-trigger" onclick="startMattressFlow()">단품: 매트리스 <span>+</span></button>
+    <button class="select-trigger" onclick="startHeadFlow()">단품: 헤드 / 협탁 패키지 <span>+</span></button>
     <button class="select-trigger" onclick="openModal('tables')">단품: 테이블 <span>+</span></button>
     <button class="select-trigger" onclick="openModal('lights')">단품: 무드등 <span>+</span></button>
     <button class="select-trigger" onclick="openModal('delivery')">배송비 추가 (수도권 외) <span>+</span></button>
@@ -110,12 +110,9 @@
 </div>
 
 <script src="data.js"></script>
-
 <script>
 let currentLineup = 'ma';
 let selectedItems = [];
-
-/* --- 기능 구현부 --- */
 
 function switchLineup(l) { 
     currentLineup = l; 
@@ -131,106 +128,212 @@ function execPostcode() {
     }}).open(); 
 }
 
-// 1단계: 세트 종류
-function openSetModal() {
-    const l = document.getElementById('optionList'); 
-    document.getElementById('modalTitle').innerText = "세트 종류 선택";
-    document.getElementById('stepIndicator').innerText = "STEP 1/3";
+/* === 공통 모달 UI 함수 === */
+function showModal(title, step, contentFunc) {
+    const l = document.getElementById('optionList');
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('stepIndicator').innerText = step;
     l.innerHTML = '';
-    
-    for (let setName in data[currentLineup].sets) {
-        const set = data[currentLineup].sets[setName];
-        const div = document.createElement('div'); div.className = 'option-item';
-        div.onclick = () => selectSetSize(setName);
-        div.innerHTML = `
-            <div style="flex:1;">
-                <div style="display:flex; align-items:center; gap:5px;">
-                    <span style="font-weight:bold;">${setName}</span>
-                    <span class="discount-badge">${set.d}% 추가할인</span>
-                </div>
-                <span class="set-desc">${set.o}</span>
-            </div>
-            <span style="color:#ccc;">❯</span>
-        `;
-        l.appendChild(div);
-    }
+    contentFunc(l);
     document.getElementById('modalOverlay').style.display = 'flex';
 }
 
-// 2단계: 사이즈
-function selectSetSize(setName) {
-    const l = document.getElementById('optionList'); 
-    document.getElementById('modalTitle').innerText = `${setName} - 사이즈 선택`;
-    document.getElementById('stepIndicator').innerText = "STEP 2/3";
-    l.innerHTML = '';
-    
-    for (let size in data[currentLineup].sets[setName].sizes) {
-        const div = document.createElement('div'); div.className = 'option-item';
-        div.onclick = () => selectSetType(setName, size);
-        div.innerHTML = `<span>${size} 사이즈</span><span style="color:#ccc;">❯</span>`;
-        l.appendChild(div);
-    }
-}
-
-// 3단계: 매트리스
-function selectSetType(setName, size) {
-    const l = document.getElementById('optionList'); 
-    document.getElementById('modalTitle').innerText = "매트리스 타입 선택";
-    document.getElementById('stepIndicator').innerText = "STEP 3/3";
-    l.innerHTML = '';
-    
-    const p = data[currentLineup].sets[setName].sizes[size]; 
-    const types = [{n:"하드", fp:p[2]}, {n:"미디움 하드", fp:p[3]}];
-    
-    types.forEach(type => {
-        const div = document.createElement('div'); div.className = 'option-item';
-        div.onclick = () => { 
-            addItem(`${setName} ${size} (${type.n})`, type.fp, currentLineup, data[currentLineup].sets[setName].o, p[0]); 
-            closeModal(); 
-        };
-        div.innerHTML = `
-            <div style="flex:1;">
-                <span style="font-weight:bold;">${type.n}</span>
-                <div style="margin-top:5px;">
-                    <span class="price-origin">₩${p[0].toLocaleString()}</span>
-                    <span class="price-selling">판매가: ₩${p[1].toLocaleString()}</span>
-                    <span class="price-final">최종가: ₩${type.fp.toLocaleString()}원</span>
-                </div>
-            </div>
-        `;
-        l.appendChild(div);
+/* === 프레임 단품 로직 === */
+function startFrameFlow() {
+    const totalSteps = currentLineup === 'ma' ? 2 : 1;
+    showModal("프레임 사이즈 선택", `STEP 1/${totalSteps}`, (l) => {
+        const frames = data[currentLineup].framePrices;
+        for (let size in frames) {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => selectFrameColor(size);
+            div.innerHTML = `<span>${size} 사이즈</span><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        }
     });
 }
 
-// 단품/옵션 모달
+function selectFrameColor(size) {
+    if (currentLineup === 'shuv') {
+        const p = data.shuv.framePrices[size];
+        addItem(`${size} 프레임 (보에르 Fog)`, p.p, 'shuv', '', p.op);
+        closeModal();
+    } else {
+        showModal("프레임 색상 선택", "STEP 2/2", (l) => {
+            const colors = data.ma.colors;
+            const p = data.ma.framePrices[size];
+            colors.forEach(color => {
+                const div = document.createElement('div'); div.className = 'option-item';
+                div.onclick = () => { addItem(`${size} 프레임 (${color})`, p.p, 'ma', '', p.op); closeModal(); };
+                div.innerHTML = `<span>${color}</span><span style="color:#ccc;">❯</span>`;
+                l.appendChild(div);
+            });
+        });
+    }
+}
+
+/* === 패브릭 커스텀 2단계 로직 === */
+function startFabricFlow() {
+    showModal("패브릭 종류 선택", "STEP 1/2", (l) => {
+        const groups = data.shuv.fabricGroups;
+        for (let groupName in groups) {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => selectFabricColor(groupName);
+            div.innerHTML = `<span>${groupName}</span><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        }
+    });
+}
+
+function selectFabricColor(groupName) {
+    showModal(`${groupName} 컬러 선택`, "STEP 2/2", (l) => {
+        const options = data.shuv.fabricGroups[groupName];
+        options.forEach(opt => {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => { addItem(`패브릭 (${groupName} - ${opt.n})`, opt.p, 'shuv', '', opt.op); closeModal(); };
+            div.innerHTML = `<div><span>${opt.n}</span><div style="margin-top:2px;">${opt.op > 0 ? `<span class="price-origin">₩${opt.op.toLocaleString()}</span>` : ''}<span style="font-weight:bold;">+ ₩${opt.p.toLocaleString()}원</span></div></div>`;
+            l.appendChild(div);
+        });
+    });
+}
+
+/* === 헤드 단품 2~3단계 로직 === */
+function startHeadFlow() {
+    const totalSteps = currentLineup === 'ma' ? 3 : 2;
+    showModal("헤드 사이즈 선택", `STEP 1/${totalSteps}`, (l) => {
+        const headPrices = data[currentLineup].headPrices;
+        for (let size in headPrices) {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => currentLineup === 'ma' ? selectHeadColor(size) : selectHeadType(size, null);
+            div.innerHTML = `<span>${size} 사이즈</span><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        }
+    });
+}
+
+function selectHeadColor(size) {
+    showModal("헤드 색상 선택", "STEP 2/3", (l) => {
+        const colors = data.ma.colors;
+        colors.forEach(color => {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => selectHeadType(size, color);
+            div.innerHTML = `<span>${color}</span><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        });
+    });
+}
+
+function selectHeadType(size, color) {
+    const step = currentLineup === 'ma' ? 3 : 2;
+    const total = currentLineup === 'ma' ? 3 : 2;
+    showModal("헤드 구성 선택", `STEP ${step}/${total}`, (l) => {
+        const options = data[currentLineup].headPrices[size];
+        for (let typeName in options) {
+            const p = options[typeName];
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => {
+                const name = color ? `${size} ${typeName} (${color})` : `${size} ${typeName}`;
+                addItem(name, p.p, currentLineup, '', p.op);
+                closeModal();
+            };
+            div.innerHTML = `<div><span>${typeName}</span><div style="margin-top:2px;"><span class="price-origin">₩${p.op.toLocaleString()}</span><span class="price-final" style="display:inline; font-size:0.95rem;">₩${p.p.toLocaleString()}원</span></div></div>`;
+            l.appendChild(div);
+        }
+    });
+}
+
+/* === 매트리스 단품 2단계 로직 === */
+function startMattressFlow() {
+    showModal("매트리스 사이즈 선택", "STEP 1/2", (l) => {
+        for (let size in mattressPrices) {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => selectMattressType(size);
+            div.innerHTML = `<span>${size} 사이즈</span><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        }
+    });
+}
+
+function selectMattressType(size) {
+    showModal("강도(타입) 선택", "STEP 2/2", (l) => {
+        const types = mattressPrices[size];
+        for (let typeName in types) {
+            const p = types[typeName];
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => { addItem(`${size} 매트리스 (${typeName})`, p.p, currentLineup, '', p.op); closeModal(); };
+            div.innerHTML = `<div><span>${typeName}</span><div style="margin-top:2px;"><span class="price-origin">₩${p.op.toLocaleString()}</span><span class="price-final" style="display:inline; font-size:0.95rem;">₩${p.p.toLocaleString()}원</span></div></div>`;
+            l.appendChild(div);
+        }
+    });
+}
+
+/* === 세트 상품 3~4단계 로직 === */
+function startSetFlow() {
+    const totalSteps = currentLineup === 'ma' ? 4 : 3;
+    showModal("세트 종류 선택", `STEP 1/${totalSteps}`, (l) => {
+        for (let setName in data[currentLineup].sets) {
+            const set = data[currentLineup].sets[setName];
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => selectSetSize(setName, totalSteps);
+            div.innerHTML = `<div style="flex:1;"><div style="display:flex; align-items:center; gap:5px;"><span style="font-weight:bold;">${setName}</span><span class="discount-badge">${set.d}% 추가할인</span></div><span class="set-desc">${set.o}</span></div><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        }
+    });
+}
+
+function selectSetSize(setName, totalSteps) {
+    showModal(`${setName} - 사이즈 선택`, `STEP 2/${totalSteps}`, (l) => {
+        for (let size in data[currentLineup].sets[setName].sizes) {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => currentLineup === 'ma' ? selectSetColor(setName, size, totalSteps) : selectSetMattress(setName, size, totalSteps, null);
+            div.innerHTML = `<span>${size} 사이즈</span><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        }
+    });
+}
+
+function selectSetColor(setName, size, totalSteps) {
+    showModal("프레임 색상 선택", `STEP 3/${totalSteps}`, (l) => {
+        data.ma.colors.forEach(color => {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => selectSetMattress(setName, size, totalSteps, color);
+            div.innerHTML = `<span>${color}</span><span style="color:#ccc;">❯</span>`;
+            l.appendChild(div);
+        });
+    });
+}
+
+function selectSetMattress(setName, size, totalSteps, color) {
+    const stepNum = currentLineup === 'ma' ? 4 : 3;
+    showModal("매트리스 타입 선택", `STEP ${stepNum}/${totalSteps}`, (l) => {
+        const p = data[currentLineup].sets[setName].sizes[size];
+        const types = [{n:"하드", fp:p[2]}, {n:"미디움 하드", fp:p[3]}];
+        types.forEach(type => {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => { 
+                const finalName = color ? `${setName} ${size} (${color}, ${type.n})` : `${setName} ${size} (${type.n})`;
+                addItem(finalName, type.fp, currentLineup, data[currentLineup].sets[setName].o, p[0]); closeModal(); 
+            };
+            div.innerHTML = `<div><span style="font-weight:bold;">${type.n}</span><div style="margin-top:5px;"><span class="price-origin">₩${p[0].toLocaleString()}</span><span class="price-final">세트가: ₩${type.fp.toLocaleString()}원</span></div></div>`;
+            l.appendChild(div);
+        });
+    });
+}
+
+// 기타 단품
 function openModal(c) {
-    const l = document.getElementById('optionList'); 
-    document.getElementById('modalTitle').innerText = "옵션 추가";
-    document.getElementById('stepIndicator').innerText = ""; 
-    l.innerHTML = '';
-    
-    let opts = [];
-    if(c === 'delivery') opts = deliveryData;
-    else if(c === 'mattresses') opts = mattressData;
-    else if(c === 'lights') opts = [{n:"무드등 한쪽", op:70000, p:35000}, {n:"무드등 양쪽", op:140000, p:70000}];
-    else opts = data[currentLineup][c];
-    
-    opts.forEach(opt => {
-        const div = document.createElement('div'); div.className = 'option-item';
-        div.onclick = () => { addItem(opt.n, opt.p, currentLineup, "", opt.op); closeModal(); };
-        div.innerHTML = `
-            <div style="flex:1;">
-                <span>${opt.n}</span>
-                <div style="margin-top:2px;">
-                    ${opt.op > 0 ? `<span class="price-origin">₩${opt.op.toLocaleString()}</span>` : ''}
-                    <span style="font-weight:bold; color:#555;">₩${opt.p.toLocaleString()}원</span>
-                </div>
-            </div>
-            <span style="color:var(--point-color); font-weight:bold;">+</span>
-        `;
-        l.appendChild(div);
+    showModal("옵션 추가", "", (l) => {
+        let opts = [];
+        if(c === 'delivery') opts = deliveryData;
+        else if(c === 'lights') opts = [{n:"무드등 한쪽", op:70000, p:35000}, {n:"무드등 양쪽", op:140000, p:70000}];
+        else opts = data[currentLineup][c];
+        
+        opts.forEach(opt => {
+            const div = document.createElement('div'); div.className = 'option-item';
+            div.onclick = () => { addItem(opt.n, opt.p, currentLineup, "", opt.op); closeModal(); };
+            div.innerHTML = `<div><span>${opt.n}</span><div style="margin-top:2px;">${opt.op > 0 ? `<span class="price-origin">₩${opt.op.toLocaleString()}</span>` : ''}<span style="font-weight:bold; color:#555;">₩${opt.p.toLocaleString()}원</span></div></div><span style="color:var(--point-color); font-weight:bold;">+</span>`;
+            l.appendChild(div);
+        });
     });
-    document.getElementById('modalOverlay').style.display = 'flex';
 }
 
 function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
@@ -240,19 +343,7 @@ function removeItem(id) { selectedItems = selectedItems.filter(i => i.id !== id)
 function render() {
     const list = document.getElementById('itemList'); list.innerHTML = ''; let t = 0;
     selectedItems.forEach(i => { t += i.price;
-        list.innerHTML += `
-            <div class="item-row">
-                <div style="flex:1;">
-                    <span class="brand-tag ${i.name.includes('마베드') ? 'tag-ma' : 'tag-shuv'}">${i.name.includes('마베드') ? 'MA BED' : 'SHUV'}</span>
-                    <strong style="display:block; margin-top:5px;">${i.name.replace(/^\[.*?\]\s*/, '')}</strong>
-                    ${i.desc ? `<span class="set-desc">구성: ${i.desc}</span>` : ''}
-                    <div class="price-group">
-                        ${i.origin > 0 ? `<span class="price-origin">₩${i.origin.toLocaleString()}</span>` : ''}
-                        <span class="price-final">₩${i.price.toLocaleString()}원</span>
-                    </div>
-                </div>
-                <button onclick="removeItem(${i.id})" style="border:none; background:none; font-size:1.5rem; color:#ccc; cursor:pointer;">×</button>
-            </div>`;
+        list.innerHTML += `<div class="item-row"><div style="flex:1;"><span class="brand-tag ${i.name.includes('마베드') ? 'tag-ma' : 'tag-shuv'}">${i.name.includes('마베드') ? 'MA BED' : 'SHUV'}</span><strong style="display:block; margin-top:5px;">${i.name.replace(/^\[.*?\]\s*/, '')}</strong>${i.desc ? `<span class="set-desc">구성: ${i.desc}</span>` : ''}<div class="price-group">${i.origin > 0 ? `<span class="price-origin">₩${i.origin.toLocaleString()}</span>` : ''}<span class="price-final">₩${i.price.toLocaleString()}원</span></div></div><button onclick="removeItem(${i.id})" style="border:none; background:none; font-size:1.5rem; color:#ccc; cursor:pointer;">×</button></div>`;
     }); document.getElementById('totalDisplay').innerText = t.toLocaleString();
 }
 
@@ -261,25 +352,18 @@ function copyText() {
     const s = { n: document.getElementById('custName').value, p: document.getElementById('custPhone').value, a: document.getElementById('custAddr').value + " " + document.getElementById('custAddrDetail').value, m: document.getElementById('custMsg').value };
     const items = selectedItems.map(i => `- ${i.name} ${i.desc ? `(${i.desc})` : ''} : ${i.price.toLocaleString()}원`).join('\n');
     const txt = `[버킷츠 견적서]\n고객명: ${s.n}\n연락처: ${s.p}\n주소: ${s.a}\n\n${items}\n\n총 합계: ${document.getElementById('totalDisplay').innerText}원`;
-    
-    const t = document.createElement("textarea"); document.body.appendChild(t); t.value = txt; t.select(); document.execCommand('copy'); document.body.removeChild(t); 
-    alert("견적 내역이 복사되었습니다!");
+    const t = document.createElement("textarea"); document.body.appendChild(t); t.value = txt; t.select(); document.execCommand('copy'); document.body.removeChild(t); alert("견적 내역이 복사되었습니다!");
 }
 
 async function downloadImage() {
     if(!selectedItems.length) return alert("선택된 품목이 없습니다.");
     const r = document.getElementById('receipt-temp');
     const s = { n: document.getElementById('custName').value, p: document.getElementById('custPhone').value, a: document.getElementById('custAddr').value + " " + document.getElementById('custAddrDetail').value };
-    
     let h = `<div class="receipt-h"><strong style="font-size:22px;">birkits</strong><br><span style="font-size:12px;">스마트 견적서</span></div><div style="margin-bottom:20px; font-size:12px; line-height:1.6; border-bottom:1px solid #eee; padding-bottom:15px;"><strong>고객명:</strong> ${s.n}<br><strong>연락처:</strong> ${s.p}<br><strong>주소:</strong> ${s.a}</div>`;
     selectedItems.forEach(i => { h += `<div class="receipt-line"><div style="flex:1;"><span style="font-weight:bold;">${i.name.replace(/^\[.*?\]\s*/, '')}</span>${i.desc ? `<br><span style="font-size:11px; color:#888;">${i.desc}</span>` : ''}</div><span style="font-weight:bold;">${i.price.toLocaleString()}</span></div>`; });
     h += `<div style="margin-top:20px; border-top:2px solid #333; padding-top:15px; display:flex; justify-content:space-between; font-weight:bold; font-size:18px; color:var(--sale-color);"><span>총 합계</span><span>${document.getElementById('totalDisplay').innerText}원</span></div>`;
     r.innerHTML = h;
-
-    try {
-        const canvas = await html2canvas(r, { scale: 2 });
-        const link = document.createElement('a'); link.download = '견적서.png'; link.href = canvas.toDataURL(); link.click();
-    } catch (e) { alert("저장 실패"); }
+    try { const canvas = await html2canvas(r, { scale: 2 }); const link = document.createElement('a'); link.download = '견적서.png'; link.href = canvas.toDataURL(); link.click(); } catch (e) { alert("저장 실패"); }
 }
 </script>
 </body>
